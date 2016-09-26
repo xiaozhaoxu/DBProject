@@ -10,6 +10,10 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.orm.SugarContext;
+import com.orm.query.Condition;
+import com.orm.query.Select;
+
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -31,19 +35,30 @@ public class MainActivity extends AppCompatActivity {
 
         SugarContext.init(this);
 
+
         Person person=new Person();
         person.name="aa";
         person.age=11;
+        person.addRess="北京";
 
         long i= person.save();
 
+        List<Person> pp=Select.from(Person.class)
+                .where(Condition.prop("add_Ress").eq("北京"))
+                .list();
+//        Select.from(TestRecord.class)
+//                .where(Condition.prop("test").eq("satya"),
+//                        Condition.prop("prop").eq(2))
+//                .list();
 
-        Person p1=Person.first(Person.class);
-
-        p1.name="bbbb";
-
-        p1.update();
-        Person p2=Person.first(Person.class);
+        List<Person> pp2=Person.find(Person.class,"add_Ress=?","北京");
+//
+       Person p1=Person.first(Person.class);
+//
+//        p1.name="bbbb";
+//
+//        p1.update();
+//        Person p2=Person.first(Person.class);
 
     }
 

@@ -8,5 +8,6 @@ import com.orm.SugarRecord;
 public class Person extends SugarRecord {
     String name;
     int age;
+    String addRess;
 
 }
