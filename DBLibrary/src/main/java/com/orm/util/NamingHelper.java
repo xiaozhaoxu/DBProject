@@ -19,34 +19,35 @@ public class NamingHelper {
         if (camelCased.equalsIgnoreCase(SugarRecord.SUGARIDNAME)) {
             return SugarRecord.SUGARIDNAME;
         }
+        return camelCased;
 
-        StringBuilder sb = new StringBuilder();
-        char[] buf = camelCased.toCharArray();
-
-        for (int i = 0; i < buf.length; i++) {
-            char prevChar = (i > 0) ? buf[i - 1] : 0;
-            char c = buf[i];
-            char nextChar = (i < buf.length - 1) ? buf[i + 1] : 0;
-            boolean isFirstChar = (i == 0);
-
-            if (isFirstChar || Character.isLowerCase(c) || Character.isDigit(c)) {
-                sb.append(Character.toUpperCase(c));
-            } else if (Character.isUpperCase(c)) {
-                if (Character.isLetterOrDigit(prevChar)) {
-                    if (Character.isLowerCase(prevChar)) {
-                        sb.append('_').append(c);
-                    } else if (nextChar > 0 && Character.isLowerCase(nextChar)) {
-                        sb.append('_').append(c);
-                    } else {
-                        sb.append(c);
-                    }
-                } else {
-                    sb.append(c);
-                }
-            }
-        }
-
-        return sb.toString();
+//        StringBuilder sb = new StringBuilder();
+//        char[] buf = camelCased.toCharArray();
+//
+//        for (int i = 0; i < buf.length; i++) {
+//            char prevChar = (i > 0) ? buf[i - 1] : 0;
+//            char c = buf[i];
+//            char nextChar = (i < buf.length - 1) ? buf[i + 1] : 0;
+//            boolean isFirstChar = (i == 0);
+//
+//            if (isFirstChar || Character.isLowerCase(c) || Character.isDigit(c)) {
+//                sb.append(Character.toUpperCase(c));
+//            } else if (Character.isUpperCase(c)) {
+//                if (Character.isLetterOrDigit(prevChar)) {
+//                    if (Character.isLowerCase(prevChar)) {
+//                        sb.append('_').append(c);
+//                    } else if (nextChar > 0 && Character.isLowerCase(nextChar)) {
+//                        sb.append('_').append(c);
+//                    } else {
+//                        sb.append(c);
+//                    }
+//                } else {
+//                    sb.append(c);
+//                }
+//            }
+//        }
+//
+//        return sb.toString();
     }
 
     /**

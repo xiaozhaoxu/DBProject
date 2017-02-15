@@ -321,7 +321,7 @@ public class SugarRecord {
         List<String> whereArgs = new ArrayList<String>();
 
         for (Field column : columns) {
-            if(column.isAnnotationPresent(Unique.class)) {
+            if (column.isAnnotationPresent(Unique.class)) {
                 try {
                     column.setAccessible(true);
                     String columnName = NamingHelper.toSQLName(column);
@@ -335,6 +335,15 @@ public class SugarRecord {
             } else {
                 if (!column.getName().equals(SUGARIDNAME)) {
                     ReflectionUtil.addFieldValueToColumn(values, column, object, entitiesMap);
+                } else {
+                    try {
+                        String columnName = NamingHelper.toSQLName(column);
+                        Object columnValue = column.get(object);
+                        whereClause.append(columnName).append(" = ?");
+                        whereArgs.add(String.valueOf(columnValue));
+                    } catch (IllegalAccessException e) {
+                        e.printStackTrace();
+                    }
                 }
             }
         }
